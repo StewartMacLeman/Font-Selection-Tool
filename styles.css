@@ -5,6 +5,10 @@ html {
 *, *:before, *:after {
   box-sizing: inherit;
 }
+:root {
+  --greyBorder : rgba(128, 128, 128, 0.4);
+}
+
 body {
   width: 80%;
   height: 99vh;
@@ -50,10 +54,53 @@ h1, h2, p, button {
  .main {
    width: 100%;
    height: 82vh;
-   padding: .5rem;
-   /* display: grid;
-   grid-template-rows: 6% 21% 3% 20% 20% 3% 21% 6%; */
+   padding: 1%;
+   /* padding: .5rem; */
+   display: grid;
+   grid-template-rows: auto auto auto auto auto;
+   grid-row-gap: .5rem;
  }
+ /* The colour selection containers. -------------------- */
+.colScrollCont {
+  border: .15rem solid black;
+}
+.horizontalColDiv {
+  display: flex;
+  overflow-y: hidden;
+  overflow-x: scroll;
+  white-space: nowrap;
+  border: .15rem solid black;
+}
+.horizontalColItem {
+  display: inline-block;
+  min-height: 50px;
+  min-width: 100px;
+  padding: 0;
+  margin: 0;
+  /* background-color: powderblue; */
+  border: .1rem solid var(--greyBorder);
+}
+.horizontalColItem:hover {
+  cursor: pointer;
+}
+/* The sample text container. --------------------------- */
+.textContainer {
+  border: .15rem solid black;
+}
+/* The buttons container. ------------------------------- */
+.buttonsContainer {
+  border: .15rem solid black;
+}
+/* The fonts scroll container. -------------------------- */
+.fontScrollCont {
+  border: .15rem solid black;
+}
+.fontScrollItem {
+
+}
+.fontItemText {
+
+}
  /* Body and Font size queries.-------------------------- */
  @media screen and (max-width: 850px){
    html { font-size: 12px; }
@@ -81,4 +128,12 @@ h1, h2, p, button {
  @media screen and (max-width: 304px){
    .header { height: 13vh; }
    .main { height: 86vh; }
+ }
+ /* Horizontal colour items. ------------------------------ */
+ @media screen and (max-width: 450px){
+   .horizontalColItem {
+     min-height: 35px;
+     min-width: 75px;
+   }
+
  }
