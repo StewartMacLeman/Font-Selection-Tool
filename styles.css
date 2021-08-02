@@ -1,3 +1,84 @@
-body {
-  background-color: pink;
+html {
+  font-size: 16px;
+  box-sizing: border-box;
 }
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+body {
+  width: 80%;
+  height: 99vh;
+  margin: 0 auto;
+  border: .25rem solid black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 { font-size: 3rem; }
+h2 { font-size: 2rem; }
+p { font-size: 1.5rem; }
+button { font-size: 1.25rem; }
+
+h1, h2, p, button {
+  font-family: helvetica, tahoma, serif;
+  text-align: center;
+  margin: 0 auto;
+  padding: .25rem;
+  background-color: none;
+}
+/* Button styles. ----------------------------------- */
+ button {
+   background-color: black;
+   color: white;
+   border-radius: 8px;
+ }
+ button:hover {
+   background-color: white;
+   color: black;
+   cursor: pointer;
+ }
+ /* The header styles. ---------------------------------- */
+ .header {
+   width: 100%;
+   height: 16vh;
+   background-color: white;
+   border-bottom: .25rem solid black;
+   padding-bottom: .5rem;
+ }
+ /* The main container. --------------------------------- */
+ .main {
+   width: 100%;
+   height: 82vh;
+   padding: .5rem;
+   /* display: grid;
+   grid-template-rows: 6% 21% 3% 20% 20% 3% 21% 6%; */
+ }
+ /* Body and Font size queries.-------------------------- */
+ @media screen and (max-width: 850px){
+   html { font-size: 12px; }
+ }
+ @media screen and (max-width: 450px){
+   html { font-size: 9px; }
+   button { font-size: 2rem; }
+ }
+ @media screen and (max-width: 560px){
+   body { width: 100%; }
+ }
+ /* Header and grid section vh adjustments. ---------------- */
+ @media screen and (max-width: 850px){
+   .header { height: 12vh; }
+   .main { height: 86vh; }
+ }
+ @media screen and (max-width: 450px){
+   .header { height: 10vh; }
+   .main { height: 89vh; }
+ }
+ @media screen and (max-width: 350px){
+   h1 { font-size: 2.75rem; }
+   h2 { font-size: 1.75rem; }
+ }
+ @media screen and (max-width: 304px){
+   .header { height: 13vh; }
+   .main { height: 86vh; }
+ }
