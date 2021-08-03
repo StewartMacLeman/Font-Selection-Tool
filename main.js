@@ -49,6 +49,8 @@ let textColourMessage = document.getElementById("textCol");
 let textSampleItem = document.querySelectorAll(".elementTypeCont *");
 let textContDiv = document.getElementById("textCont");
 
+let fontScollDiv = document.getElementById("fontCont");
+
 let resetButton = document.getElementById("reset");
 
 window.addEventListener("resize", adjustWidth);
@@ -109,18 +111,50 @@ function addTextColour(e){
   }
   textColourMessage.textContent = `The text colour selected is: ${colour}`;
 }
+// Creates the font family scroll divs. ---------------------------------
+function createFontDivs(array, scrollBox){
+  for (let i = 0; i < array.length; i++){
+    let div = document.createElement('div');
+    div.classList.add("fontScrollItemDiv");
+
+    div.addEventListener("click", getFont);
+
+    let paragraph = document.createElement('p');
+    paragraph.classList.add("fontItemText");
+    let paragraphText = document.createTextNode(`${array[i].group}: ${array[i].family}`);
+    paragraph.style.fontFamily = `${array[i].family}`;
+
+    paragraph.appendChild(paragraphText);
+    div.appendChild(paragraph);
+    scrollBox.appendChild(div);
+  }
+}
+createFontDivs(fontsArray, fontScollDiv);
+// The function that adds the font to the text sample and updates the respective text.
+function getFont(e){
+  let font = e.target.style.fontFamily;
+  let text = e.target.textContent;
+  for (let i = 0; i < textSampleItem.length; i++){
+    textSampleItem[i].style.fontFamily = font;
+    textSampleItem[i].textContent = text;
+  }
+
+}
 // Reset function. --------------------------------------------------------
 reset.addEventListener("click", resetApp);
 
 function resetApp(){
   bgHorizontalScrollDiv.scrollLeft = 0;
   textHorizontalScrollDiv.scrollLeft = 0;
+  fontScollDiv.scrollTop = 0;
 
   textContDiv.style.backgroundColor = "white";
   bgColourMessage.textContent = `The background colour selected is: white`;
 
   for (let i = 0; i < textSampleItem.length; i++){
     textSampleItem[i].style.color = "black";
+    textSampleItem[i].style.fontFamily = "helvetica";
+    textSampleItem[i].textContent = "Font Group: Font Family";
   }
   textColourMessage.textContent = `The text colour selected is: black`;
 
