@@ -99,9 +99,6 @@ h1, h2, p, button, span {
 .elementTypeCont h1, .elementTypeCont h2, .elementTypeCont p {
   border: .1rem solid var(--greyBorder);
 }
-.elementTypeCont h1 span, .elementTypeCont h2 span, .elementTypeCont p span {
-  display: inline-block;
-}
 /* The buttons container. ------------------------------- */
 .buttonsContainer {
   display: flex;
@@ -114,6 +111,14 @@ h1, h2, p, button, span {
 }
 .buttonsContainer span {
   border: .1rem solid var(--greyBorder);
+}
+.buttonOn {
+  background-color: white;
+  color: black;
+}
+.buttonOff {
+  background-color: black;
+  color: white;
 }
 /* The fonts scroll container. -------------------------- */
 .fontScrollCont {

@@ -51,6 +51,9 @@ let textContDiv = document.getElementById("textCont");
 
 let fontScollDiv = document.getElementById("fontCont");
 
+let h1Button = document.getElementById("h1But");
+let h2Button = document.getElementById("h2But");
+let paraButton = document.getElementById("paraBut");
 let resetButton = document.getElementById("reset");
 
 window.addEventListener("resize", adjustWidth);
@@ -130,6 +133,7 @@ function createFontDivs(array, scrollBox){
   }
 }
 createFontDivs(fontsArray, fontScollDiv);
+
 // The function that adds the font to the text sample and updates the respective text.
 function getFont(e){
   let font = e.target.style.fontFamily;
@@ -138,7 +142,55 @@ function getFont(e){
     textSampleItem[i].style.fontFamily = font;
     textSampleItem[i].textContent = text;
   }
+}
+// Swap the type of element: h1, h2, or p. ------------------------------
+h1Button.addEventListener("click", swapElement);
+h2Button.addEventListener("click", swapElement);
+paraButton.addEventListener("click", swapElement);
 
+function swapElement(e){
+  let element = e.target.value;
+  if (element == "h1"){
+    textSampleItem[0].classList.remove("hide");
+    textSampleItem[1].classList.add("hide");
+    textSampleItem[2].classList.add("hide");
+    h1On();
+  } else if (element == "h2"){
+    textSampleItem[0].classList.add("hide");
+    textSampleItem[1].classList.remove("hide");
+    textSampleItem[2].classList.add("hide");
+    h2On();
+  } else if (element == "para"){
+    textSampleItem[0].classList.add("hide");
+    textSampleItem[1].classList.add("hide");
+    textSampleItem[2].classList.remove("hide");
+    paraOn();
+  }
+}
+// Functions to toggle the BG and text button colours. ---
+function h1On(){
+  h1Button.classList.add("buttonOn");
+  h1Button.classList.remove("buttonOff");
+  h2Button.classList.add("buttonOff");
+  h2Button.classList.remove("buttonOn");
+  paraButton.classList.add("buttonOff");
+  paraButton.classList.remove("buttonOn");
+}
+function h2On(){
+  h1Button.classList.add("buttonOff");
+  h1Button.classList.remove("buttonOn");
+  h2Button.classList.add("buttonOn");
+  h2Button.classList.remove("buttonOff");
+  paraButton.classList.add("buttonOff");
+  paraButton.classList.remove("buttonOn");
+}
+function paraOn(){
+  h1Button.classList.add("buttonOff");
+  h1Button.classList.remove("buttonOn");
+  h2Button.classList.add("buttonOff");
+  h2Button.classList.remove("buttonOn");
+  paraButton.classList.add("buttonOn");
+  paraButton.classList.remove("buttonOff");
 }
 // Reset function. --------------------------------------------------------
 reset.addEventListener("click", resetApp);
@@ -156,6 +208,12 @@ function resetApp(){
     textSampleItem[i].style.fontFamily = "helvetica";
     textSampleItem[i].textContent = "Font Group: Font Family";
   }
+  textSampleItem[0].classList.remove("hide");
+  textSampleItem[1].classList.add("hide");
+  textSampleItem[2].classList.add("hide");
+
+  h1On();
+
   textColourMessage.textContent = `The text colour selected is: black`;
 
 
