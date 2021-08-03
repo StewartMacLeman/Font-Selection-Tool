@@ -37,7 +37,7 @@ let fontsArray = [
 { group: "script / cursive", family: "brush script mt" }
 ];
 
-// Gobal varibles. -------------------------------------
+// Gobal varibles. -----------------------------------------------------
 let mainContainer = document.getElementById("main");
 
 let bgHorizontalScrollDiv = document.getElementById("bgHorScroll");
@@ -64,20 +64,19 @@ let fontSize = 0;
 let resetButton = document.getElementById("reset");
 // ///////////////////////////////////////////////////////////////////////
 
-// Getting the current font pixel size.
+// Gets the current font-display pixel size. ----------------------------
 window.addEventListener("resize", getPixelSize);
 document.addEventListener("DOMContentLoaded", getPixelSize);
 
 function getPixelSize(){
   for (let i = 0; i < textSampleItem.length; i++){
     if (textSampleItem[i].classList.contains("hide") == false){
+
       let elementShownStyles = window.getComputedStyle(textSampleItem[i]);
       let pixelSize = elementShownStyles.getPropertyValue("font-size");
-      console.log(pixelSize);
-      let parsedPixels = parseFloat(pixelSize);
-      console.log(parsedPixels);
+      let parsedPixels = Math.round(parseFloat(pixelSize));
       fontSize = parsedPixels;
-      console.log(fontSize);
+
       displayPixels();
     }
   }
@@ -85,21 +84,20 @@ function getPixelSize(){
 function displayPixels(){
   fontSizeDisplay.textContent = fontSize + "px";
 }
-// ----------------------------------------------------------------
+// --------------------------------------------------------------------------
 window.addEventListener("resize", adjustWidth);
 document.addEventListener("DOMContentLoaded", adjustWidth);
 // The adjustWidth function is required to provide the width in pixels. This enables the colour contianers to be scrolled horizontally, and ensures the container does not become wider than the page.
 function adjustWidth(){
   let styles = window.getComputedStyle(mainContainer);
   let width = styles.getPropertyValue("width");
-  // console.log(width);
   let parsedWidth = parseFloat(width);
-  // console.log(parsedWidth);
-  let adjustedWidth = parsedWidth - (parsedWidth * 0.03)
+  let adjustedWidth = parsedWidth - (parsedWidth * 0.03);
+  
   bgHorizontalScrollDiv.style.width = adjustedWidth + "px";
   textHorizontalScrollDiv.style.width = adjustedWidth + "px";
 }
-
+// -----------------------------------------------------------------------
 // Iterates through the "colourArray".
 // Creates the horizontal scroll divs for the colours.
 // Adds a click event listener to each div.
@@ -132,7 +130,6 @@ createTextColourScroll(colourArray, textHorizontalScrollDiv);
 // Add colours to the sample text and updates the related messages. ------
 function addBGColour(e){
   let colour = e.target.style.backgroundColor;
-  console.log(colour);
   textContDiv.style.backgroundColor = colour;
   bgColourMessage.textContent = `The background colour selected is: ${colour}`;
 }
@@ -143,13 +140,13 @@ function addTextColour(e){
   }
   textColourMessage.textContent = `The text colour selected is: ${colour}`;
 }
-// Creates the font family scroll divs. ---------------------------------
+// Creates the font family scroll divs. --------------------------------------
 function createFontDivs(array, scrollBox){
   for (let i = 0; i < array.length; i++){
     let div = document.createElement('div');
     div.classList.add("fontScrollItemDiv");
 
-    div.addEventListener("click", getFont);
+    div.addEventListener("click", addFont);
 
     let paragraph = document.createElement('p');
     paragraph.classList.add("fontItemText");
@@ -163,8 +160,8 @@ function createFontDivs(array, scrollBox){
 }
 createFontDivs(fontsArray, fontScollDiv);
 
-// The function that adds the font to the text sample and updates the respective text.
-function getFont(e){
+// Adds the font to the text sample and updates the respective text. ------
+function addFont(e){
   let font = e.target.style.fontFamily;
   let text = e.target.textContent;
   for (let i = 0; i < textSampleItem.length; i++){
@@ -172,7 +169,7 @@ function getFont(e){
     textSampleItem[i].textContent = text;
   }
 }
-// Swap the type of element: h1, h2, or p. ------------------------------
+// Swaps the type of element: h1, h2, or p. ----------------------------------
 h1Button.addEventListener("click", swapElement);
 h2Button.addEventListener("click", swapElement);
 paraButton.addEventListener("click", swapElement);
