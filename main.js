@@ -63,6 +63,7 @@ let fontSize = 0;
 
 let resetButton = document.getElementById("reset");
 // ///////////////////////////////////////////////////////////////////////
+
 // Getting the current font pixel size.
 window.addEventListener("resize", getPixelSize);
 document.addEventListener("DOMContentLoaded", getPixelSize);
