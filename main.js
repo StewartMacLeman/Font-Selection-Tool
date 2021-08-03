@@ -54,12 +54,40 @@ let fontScollDiv = document.getElementById("fontCont");
 let h1Button = document.getElementById("h1But");
 let h2Button = document.getElementById("h2But");
 let paraButton = document.getElementById("paraBut");
-let resetButton = document.getElementById("reset");
 
+let reduceSizeButton = document.getElementById("reducePx");
+let increaseSizeButton = document.getElementById("addPx");
+
+let fontSizeDisplay = document.getElementById("pxSize");
+let fontSize = 0;
+
+let resetButton = document.getElementById("reset");
+// ///////////////////////////////////////////////////////////////////////
+// Getting the current font pixel size.
+window.addEventListener("resize", getPixelSize);
+document.addEventListener("DOMContentLoaded", getPixelSize);
+
+function getPixelSize(){
+  for (let i = 0; i < textSampleItem.length; i++){
+    if (textSampleItem[i].classList.contains("hide") == false){
+      let elementShownStyles = window.getComputedStyle(textSampleItem[i]);
+      let pixelSize = elementShownStyles.getPropertyValue("font-size");
+      console.log(pixelSize);
+      let parsedPixels = parseFloat(pixelSize);
+      console.log(parsedPixels);
+      fontSize = parsedPixels;
+      console.log(fontSize);
+      displayPixels();
+    }
+  }
+}
+function displayPixels(){
+  fontSizeDisplay.textContent = fontSize + "px";
+}
+// ----------------------------------------------------------------
 window.addEventListener("resize", adjustWidth);
 document.addEventListener("DOMContentLoaded", adjustWidth);
-
-// The adjustWidth function required to provide the width in pixels. This enables the colour contianers content to be scrolled horizontally, and ensures the container does not become wider than the page.
+// The adjustWidth function is required to provide the width in pixels. This enables the colour contianers to be scrolled horizontally, and ensures the container does not become wider than the page.
 function adjustWidth(){
   let styles = window.getComputedStyle(mainContainer);
   let width = styles.getPropertyValue("width");
@@ -149,25 +177,29 @@ h2Button.addEventListener("click", swapElement);
 paraButton.addEventListener("click", swapElement);
 
 function swapElement(e){
+
   let element = e.target.value;
   if (element == "h1"){
     textSampleItem[0].classList.remove("hide");
     textSampleItem[1].classList.add("hide");
     textSampleItem[2].classList.add("hide");
     h1On();
+    getPixelSize();
   } else if (element == "h2"){
     textSampleItem[0].classList.add("hide");
     textSampleItem[1].classList.remove("hide");
     textSampleItem[2].classList.add("hide");
     h2On();
+    getPixelSize();
   } else if (element == "para"){
     textSampleItem[0].classList.add("hide");
     textSampleItem[1].classList.add("hide");
     textSampleItem[2].classList.remove("hide");
     paraOn();
+    getPixelSize();
   }
 }
-// Functions to toggle the BG and text button colours. ---
+// Functions to toggle the elements button colours when selected. ---
 function h1On(){
   h1Button.classList.add("buttonOn");
   h1Button.classList.remove("buttonOff");
@@ -192,7 +224,32 @@ function paraOn(){
   paraButton.classList.add("buttonOn");
   paraButton.classList.remove("buttonOff");
 }
-// Reset function. --------------------------------------------------------
+// Changing the font size. --------------------------------------------
+reduceSizeButton.addEventListener("click", reduceFontSize);
+increaseSizeButton.addEventListener("click", increaseFontSize);
+
+function reduceFontSize(){
+  fontSize = fontSize - 1;
+
+  for (let i = 0; i < textSampleItem.length; i++){
+    if (textSampleItem[i].classList.contains("hide") == false){
+      textSampleItem[i].style.fontSize = fontSize + "px";
+      getPixelSize();
+    }
+  }
+}
+function increaseFontSize(){
+  fontSize = fontSize + 1;
+
+  for (let i = 0; i < textSampleItem.length; i++){
+    if (textSampleItem[i].classList.contains("hide") == false){
+      textSampleItem[i].style.fontSize = fontSize + "px";
+      getPixelSize();
+    }
+  }
+}
+
+// Reset function. ----------------------------------------------------
 reset.addEventListener("click", resetApp);
 
 function resetApp(){
@@ -212,9 +269,13 @@ function resetApp(){
   textSampleItem[1].classList.add("hide");
   textSampleItem[2].classList.add("hide");
 
+  textSampleItem[0].style.fontSize = "48px";
+  textSampleItem[1].style.fontSize = "32px";
+  textSampleItem[2].style.fontSize = "24px";
+
   h1On();
 
   textColourMessage.textContent = `The text colour selected is: black`;
-
+  getPixelSize();
 
 }
