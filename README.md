@@ -8,7 +8,7 @@ This tool is for helping people to select fonts when building web-applications.
 * The ability to adjust the font-size;
 * The sample text can be switched between h1, h2 and p html elements.
 ---
-## Build with:
+## Built with:
 * JavaScript
 * CSS
 * HTML
